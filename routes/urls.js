@@ -37,3 +37,5 @@ router.post('/shorturl', async (req, res) => {
         res.status(400).json('Invalid Original Url')
     }
 })
+
+module.exports = router

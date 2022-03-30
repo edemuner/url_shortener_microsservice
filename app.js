@@ -10,5 +10,6 @@ app.use(Express.urlencoded({extended:true}))
 app.use(Express.json())
 
 app.use('/api', require('./routes/urls'))
+app.use('/api', require('./routes/index'))
 
 app.listen(PORT, () => console.log(`Listening to port ${PORT}`))
