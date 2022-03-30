@@ -6,4 +6,9 @@ connectDB()
 
 const PORT = process.env.PORT || 3000
 
+app.use(Express.urlencoded({extended:true}))
+app.use(Express.json())
+
+app.use('/api', require('./routes/urls'))
+
 app.listen(PORT, () => console.log(`Listening to port ${PORT}`))
