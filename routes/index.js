@@ -1,11 +1,16 @@
 const Express = require('express')
-const req = require('express/lib/request')
 const router = Express.Router()
 const Url = require('../models/Url')
+const path = require('path')
 
-router.get('/shorturl/:urlId', async (rec, res) => {
+
+router.get('/', (req, res, next) => {
+    res.sendFile(path.join(__dirname + '/../views/index.html'))
+})
+
+router.get('/api/shorturl/:urlId', async (req, res) => {
     try {
-        const url = await Url.findOne({ urlId: req.params.url})
+        const url = await Url.findOne({ urlId: req.params.urlId})
 
         if (url){
             url.clicks++
