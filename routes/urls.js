@@ -5,6 +5,10 @@ const Url = require('../models/Url')
 const utils = require('../utils/utils')
 require('dotenv').config()
 
+function resFilter(url){
+    return {original_url:url.origUrl, short_url:url.shortUrl}
+}
+
 router.post('/shorturl', async (req, res) => {
     const { origUrl } = req.body
     const base = process.env.BASE
@@ -15,7 +19,7 @@ router.post('/shorturl', async (req, res) => {
         try {
             let url = await Url.findOne({origUrl})
             if (url){
-                res.json(url)
+                res.json(resFilter(url))
             } else {
                 const shortUrl = `${base}/${urlId}`
 
@@ -27,7 +31,7 @@ router.post('/shorturl', async (req, res) => {
                 })
 
                 await url.save()
-                res.json(url)
+                res.json(resFilter(url))
             }
         } catch(err){
             console.log(err)
